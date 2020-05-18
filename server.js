@@ -6,6 +6,10 @@ const app = express();
 
 connectDB();
 
+//Init bodyparser
+
+app.use(express.json({extended:false}))
+
 const port = process.env.PORT || 8080 ;
 
 
@@ -13,7 +17,7 @@ app.get('/',(req,res)=>{
     res.send('hello')
 })
 
-app.use('/api/user',require('./routes/api/user'))
+app.use('/api/register',require('./routes/api/user'))
 app.use('/api/auth',require('./routes/api/auth'))
 app.use('/api/profile',require('./routes/api/profile'))
 app.use('/api/post',require('./routes/api/post'))
