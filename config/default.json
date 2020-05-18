@@ -1,4 +1,6 @@
 {
-    "mongoURI":"mongodb+srv://Eralp:258456159@devcommunity-iyyvh.mongodb.net/test?retryWrites=true&w=majority",
-    "jwtSecret":"a2eralpa2"
+    "mongoURI":"mongodb+srv:/username:password@devcommunity-iyyvh.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret":"secret"
 }
+
+
