@@ -10,10 +10,10 @@ const secretKey = config.get('jwtSecret')
 
 const User = require("../../models/User");
 
-// route POST api/register
+// route POST api/user/register
 // Register user
 router.post(
-  "/",
+  "/register",
   [
     check("name", "Name is required").not().isEmpty(),
     check("email", "Please enter a valid E-mail").isEmail(),
@@ -69,5 +69,6 @@ router.post(
    
   }
 );
+
 
 module.exports = router;

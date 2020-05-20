@@ -10,7 +10,8 @@ const secretKey = config.get('jwtSecret')
 const { check, validationResult } = require("express-validator");
 
 
-// route GET api/auth
+// route post api/auth
+//Login 
 router.post(
     "/",
     [
