@@ -1,6 +1,8 @@
 {
     "mongoURI":"mongodb+srv://username:password@devcommunity-iyyvh.mongodb.net/test?retryWrites=true&w=majority",
-    "jwtSecret":"secret"
+    "jwtSecret":"secret",
+    "githubClientId":"",
+    "githubSecret":""
 }
 
 

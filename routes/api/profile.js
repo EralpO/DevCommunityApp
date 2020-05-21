@@ -1,6 +1,8 @@
 const express = require("express");
 
 const router = express.Router();
+const request = require('request');
+const config = require('config')
 const auth = require("../../middleware/auth");
 const Profile = require("../../models/Profile");
 const User = require("../../models/User");
@@ -67,7 +69,7 @@ router.post(
 
     try {
       let profile = await Profile.findOne({ user: req.user.id });
-      //Update Profile
+      // If there is a profile Update Profile if there is not then we might create one
       if (profile) {
         profile = await Profile.updateOne(
           { user: req.user.id },
@@ -76,7 +78,7 @@ router.post(
         );
         return res.json(profile)
       }
-     //Create Profile
+     //Create Profile if there is no profile
      profile = new Profile(profileFields);
 
      
@@ -206,6 +208,35 @@ router.delete('/experience/:exp_id',auth,async (req,res)=>{
     return res.json({msg:error}).status(500)
   }
  
+})
+
+// route GET api/profile/github/:username
+//Getting last 5 repositories from github by github Username
+
+router.get('/github/:username',(req,res)=>{
+  try {
+
+    const options = {
+    uri : `https://api.github.com/users/${req.params.username}/repos?perpage=5&sort=created:asc&client_id=
+    ${config.get('githubClientId')}&client_secret=${config.get('githubSecret')}`,
+    method:'GET',
+    headers : {'user-agent' : 'node.js'}
+    };
+
+     request(options,(err,response,body)=>{
+        if(err) console.error(err)
+
+        else if(response.statusCode !== 200){
+         return res.json({msg:'There is no profile for this user'}).status(404)
+        }
+        else {
+          res.send(JSON.parse(body))
+        }
+     })
+
+  } catch (error) {
+    res.status(404).json({msg:error})
+  }
 })
 
 
